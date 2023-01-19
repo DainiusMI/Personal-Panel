@@ -14,7 +14,6 @@ export default function App() {
   const [userData, setUserData] = useState({
     user_name: "",
     user_ip: "",
-    update_location: false,
     units: "metric"
   })
   //localStorage.clear()
@@ -44,7 +43,6 @@ export default function App() {
       if (data.ipString !== userData.user_ip) {
         setUserData(prevData => ({
           ...prevData,
-          update_location: true,
           user_ip: data.ipString
         }))
       }
@@ -54,8 +52,6 @@ export default function App() {
 
   useEffect(() => { toLocalStorage() }, [userData])
 
-
-  console.log(fromLocalStorage())
 
 
   /*
