@@ -9,17 +9,68 @@ import Weather from './assets/components/Weather'
 
 export default function App() {
 
+
+
   const [userData, setUserData] = useState({
     user_name: "",
-    ip: "88.118.115.175",
-})
+    user_ip: "",
+    update_location: false,
+    units: "metric"
+  })
+  //localStorage.clear()
+  function toLocalStorage() {
+
+    localStorage.setItem("personal_panel", JSON.stringify(userData))
+  }
+  function fromLocalStorage() {
+    return JSON.parse(localStorage.getItem("personal_panel"))
+  }
+  useEffect(() => {
+
+    fetch("https://api.bigdatacloud.net/data/client-ip").
+    then(resp => {
+      if (resp.ok) {
+        return resp.json()
+      }
+      else {
+        setUserData(prevData => ({
+          ...prevData,
+          errors: ["client ip"]
+        }))
+        return
+      }
+    }).
+    then(data => {
+      if (data.ipString !== userData.user_ip) {
+        setUserData(prevData => ({
+          ...prevData,
+          update_location: true,
+          user_ip: data.ipString
+        }))
+      }
+    })
+       
+  }, [])
+
+  useEffect(() => { toLocalStorage() }, [userData])
+
+
+  console.log(fromLocalStorage())
+
+
+  /*
+  
+  <Weather 
+    userData={userData}
+    setUserData={setUserData}
+ 
+    toLocalStorage={toLocalStorage}
+    fromLocalStorage={fromLocalStorage}
+  />
+  */
 
   return (
     <div className="App">
-      <Weather 
-        userData={userData}
-        setUserData={setUserData}
-      />
     </div>
   )
 }

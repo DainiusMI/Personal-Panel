@@ -19,20 +19,20 @@ export default function Weather({userData, setUserData}) {
     }
     
     const [weather, setWeather] = useState({
-
+    
     })
-
-    useEffect(() => {
-        
-    }, [])
     const [locationData, setLocationData] = useState({
+        country_name: "",
+        country_code: "",
+        city_name: "",
+        zip_code: "",
         latitude: "",
         longitude: "",
-        zip_code: "",
-        city_name: "",
-        country_name: "",
         manual_set: false,
     })
+
+
+
 
     return (
         <div className="weather__container">
