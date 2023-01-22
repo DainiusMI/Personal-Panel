@@ -68,8 +68,24 @@ export default function Weather({userData, setUserData}) {
         }
 
     }, [userData.user_ip])
-
-
+    console.log(locationData)
+    useEffect(() => {
+        if (locationData.latitude !== "" && locationData.longitude !== "") {
+            fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${locationData.latitude}&lon=${locationData.longitude}&appid=${api_keys.openedWeatherMap}&units=${userData.units}`).
+                then(resp => {
+                    if (resp.ok) {
+                        return resp.json()
+                    }
+                    else {
+                        setUserData(prevData => ({
+                            ...prevData,
+                            errors: [...prevData.errors, "open weather"]
+                        }))
+                    }
+                }).
+                then(data => console.log(data))
+        }
+    }, [locationData.latitude, locationData.longitude])
 
     return (
         <div className="weather__container">

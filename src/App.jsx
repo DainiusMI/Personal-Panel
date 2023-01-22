@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-
+import { supabase } from './client'
 import Weather from './assets/components/Weather'
 
 
@@ -7,16 +7,22 @@ import Weather from './assets/components/Weather'
 // get IP from:
 // https://api.bigdatacloud.net/data/client-ip
 
+
+// https://app.supabase.com/project/zbhpohptkdsrrkjqwqol/editor/27042
+// db password
+// xSwwS2kwqTAZLSIr
+
 export default function App() {
 
-
+  const loggedInAs = "DainiusMI"
 
   const [userData, setUserData] = useState({
-    user_name: "",
     user_ip: "",
     units: "metric"
   })
-  //localStorage.clear()
+  localStorage.clear()
+  
+
   function toLocalStorage() {
 
     localStorage.setItem("personal_panel", JSON.stringify(userData))
@@ -56,17 +62,17 @@ export default function App() {
 
   /*
   
-  <Weather 
-    userData={userData}
-    setUserData={setUserData}
- 
-    toLocalStorage={toLocalStorage}
-    fromLocalStorage={fromLocalStorage}
-  />
   */
-
-  return (
-    <div className="App">
+ 
+ return (
+   <div className="App">
+      <Weather 
+        userData={userData}
+        setUserData={setUserData}
+     
+        toLocalStorage={toLocalStorage}
+        fromLocalStorage={fromLocalStorage}
+      />
     </div>
   )
 }
