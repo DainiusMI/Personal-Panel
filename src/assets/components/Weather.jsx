@@ -1,13 +1,8 @@
 import React, {useState, useEffect} from "react";
 
-// to get weather report
-// https://openweathermap.org/current
+// weather reports from
+// https://openweathermap.org/
 
-
-// to convert city names to coordinates
-// https://openweathermap.org/api/geocoding-api
-
-// https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}
 
 
 
@@ -17,9 +12,28 @@ export default function Weather({userData, setUserData}) {
         openedWeatherMap: "b3f5fab1dae2062b7cd950a48a936e79",
         ipToLocation: "3K7hAsyNM17mPQf6SuYWr9B6KY8kY6f0"
     }
+
+    console.log(new Date(1674669600))
     
+    const [currentWeather, setCurrentWeather] = useState({
+        icon: "",
+        temp: "",
+        wind_speed: "",
+        wind_gust: "",
+        rain: "",
+        snow: ""
+    })
+
+    const [todaysForecast, setTodaysForecast] = useState()
+    
+
     const [weather, setWeather] = useState({
-    
+        current_temp: "",
+        humidity: "",
+        precipitation: "none",
+        wind_speed: "",
+        wind_gust: "",
+        wind_direction: ""
     })
     const [locationData, setLocationData] = useState({
         country_name: "",
@@ -36,7 +50,6 @@ export default function Weather({userData, setUserData}) {
         --header 'apikey: YOUR API KEY'
     */
     useEffect(() => {
-    
         if (/\d+(\.\d+){3}/.test(userData.user_ip)) {
             fetch(`https://api.apilayer.com/ip_to_location/${userData.user_ip}`, {
                 method: "GET",
@@ -51,7 +64,7 @@ export default function Weather({userData, setUserData}) {
                 else {
                     setUserData(prevData => ({
                         ...prevData,
-                        errors: [...prevData.errors, "location by ip"]
+                        errors: [...prevData.errors, "location by ip failed"]
                     }))
                 }
             }).
@@ -68,24 +81,8 @@ export default function Weather({userData, setUserData}) {
         }
 
     }, [userData.user_ip])
-    console.log(locationData)
-    useEffect(() => {
-        if (locationData.latitude !== "" && locationData.longitude !== "") {
-            fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${locationData.latitude}&lon=${locationData.longitude}&appid=${api_keys.openedWeatherMap}&units=${userData.units}`).
-                then(resp => {
-                    if (resp.ok) {
-                        return resp.json()
-                    }
-                    else {
-                        setUserData(prevData => ({
-                            ...prevData,
-                            errors: [...prevData.errors, "open weather"]
-                        }))
-                    }
-                }).
-                then(data => console.log(data))
-        }
-    }, [locationData.latitude, locationData.longitude])
+
+    
 
     return (
         <div className="weather__container">

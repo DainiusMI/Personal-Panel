@@ -22,7 +22,7 @@ export default function App() {
   })
   localStorage.clear()
   
-
+/*
   function toLocalStorage() {
 
     localStorage.setItem("personal_panel", JSON.stringify(userData))
@@ -30,6 +30,7 @@ export default function App() {
   function fromLocalStorage() {
     return JSON.parse(localStorage.getItem("personal_panel"))
   }
+  */
   useEffect(() => {
 
     fetch("https://api.bigdatacloud.net/data/client-ip").
@@ -55,8 +56,8 @@ export default function App() {
     })
        
   }, [])
+  console.log(userData)
 
-  useEffect(() => { toLocalStorage() }, [userData])
 
 
 
@@ -70,8 +71,7 @@ export default function App() {
         userData={userData}
         setUserData={setUserData}
      
-        toLocalStorage={toLocalStorage}
-        fromLocalStorage={fromLocalStorage}
+
       />
     </div>
   )
