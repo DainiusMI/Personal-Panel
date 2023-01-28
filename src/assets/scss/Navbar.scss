@@ -3,36 +3,83 @@
 
 
 .navbar {
-    @include flex(row, center, space-between);
+    @include flex(row, center, flex-end);
+    gap: 1rem;
+    padding-inline: 1rem;
+    border-bottom: 1px solid black;
+
+    .settings__icon {
+        font-size: 1.5rem
+    }
 
 }
 
 
 .weather__gadget {
-    @include flex(column, flex-start, center);
+    @include flex(row, flex-start, center);
+    height: 3rem;
     position: relative;
     .gadget__main {
-        @include flex(row, center, flex-start);
-        gap: .7rem;
-        
-        .gadget__temp {
+        @include flex(row, center, center);
+        height: 100%;
+        font-weight: 500;
+        >* {
+            @include flex(row, center, center);
+            height: 95%;
+            padding-inline: .3rem;
+            border-inline: 1px solid #fff;
+            border-top: 1px solid #fff;
+            border-radius: .5rem .5rem 0 0;
+            &:hover {
+                height: calc(95% - 3px);
+                border-color: black;
+                border-bottom: 3px solid #fff;
+                margin-bottom: -3px;
+            }
+        }
 
-        }
-        .gadget__city {
 
-        }
-        .gadget__icon {
-            
-        }
+
     }
+    
     .gadget__extra {
         position: absolute;
-        bottom: 0;
-
-        transform: translateY(80%);
-
+        bottom: 0rem;
+        transform: translateY(100%);
+        width: 100%;
+        border-inline: 1px solid black;
+        border-bottom: 1px solid black;
+        border-radius: 0 0 .5rem .5rem;
         .gadget__extra__text {
-            
+
+            font-size: .9rem;
+            font-weight: 300;
+            padding: .5rem 1rem;
+        }
+        &.temp {
+            text-transform: capitalize;
         }
     }   
+}
+
+#expand__forecast {
+    height: calc(95% - 3px);
+    
+    :hover {
+        
+    }
+}
+
+#gadget__city {
+
+}
+#gadget__temp {
+    
+}
+#gadget__icon {
+    height: calc(95% - 3px);
+    
+}
+body {
+    
 }

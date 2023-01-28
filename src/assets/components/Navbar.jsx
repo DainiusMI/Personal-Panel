@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import NavbarWeather from "./NavbarWeather";
+
 import "../css/Navbar.css"
 
 
@@ -50,6 +50,8 @@ export default function Navbar({api_keys, userData, setUserData}) {
         switch (gadgetState.hovered) {
             case null: 
                 break;
+            case "expand__forecast": 
+                return <ExpandForecast />
             case "gadget__temp": 
                 return <FeelsLike currentWeather={currentWeather} userData={userData}/>
             case "gadget__city": 
@@ -66,11 +68,20 @@ export default function Navbar({api_keys, userData, setUserData}) {
             <div className="weather__gadget">
 
                 <div className="gadget__main">
+
+                    <i 
+                        id="expand__forecast" 
+                        className="fa-solid fa-chevron-down"
+                        onMouseOver={handleMouseOver}
+                        onMouseOut={handleMouseOut}
+                    />
+
+
                     <p 
                         id="gadget__temp" 
                         onMouseOver={handleMouseOver}
                         onMouseOut={handleMouseOut}
-                    >{currentWeather.temp} <span>{userData.units === "metric" ? " °C" : " °F"}</span></p>
+                    >{currentWeather.temp} {userData.units === "metric" ? " °C" : " °F"}</p>
                     <p 
                         id="gadget__city" 
                         onMouseOver={handleMouseOver}
@@ -91,8 +102,16 @@ export default function Navbar({api_keys, userData, setUserData}) {
                     switchExtras()
                 }
             </div>
-
+            <i className="settings__icon fa-solid fa-gear"/>
         </nav>
+    )
+}
+
+function ExpandForecast() {
+    return (
+        <div className="gadget__extra ">
+            <p className="gadget__extra__text">Click to see more detailed forcast</p>
+        </div>
     )
 }
 
