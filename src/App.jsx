@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { supabase } from './client'
-import Weather from './assets/components/Weather'
+import Navbar from './assets/components/Navbar'
 
 
 
@@ -14,25 +13,20 @@ import Weather from './assets/components/Weather'
 
 export default function App() {
 
-  const loggedInAs = "DainiusMI"
+  const api_keys = {
+    openedWeatherMap: "b3f5fab1dae2062b7cd950a48a936e79",
+    ipToLocation: "3K7hAsyNM17mPQf6SuYWr9B6KY8kY6f0"
+  }
+
 
   const [userData, setUserData] = useState({
     user_ip: "",
-    units: "metric"
+    units: "metric",
+    errors: []
   })
-  localStorage.clear()
-  
-/*
-  function toLocalStorage() {
 
-    localStorage.setItem("personal_panel", JSON.stringify(userData))
-  }
-  function fromLocalStorage() {
-    return JSON.parse(localStorage.getItem("personal_panel"))
-  }
-  */
+  // get IP
   useEffect(() => {
-
     fetch("https://api.bigdatacloud.net/data/client-ip").
     then(resp => {
       if (resp.ok) {
@@ -41,7 +35,7 @@ export default function App() {
       else {
         setUserData(prevData => ({
           ...prevData,
-          errors: ["client ip"]
+          errors: [...prevData.errors, "client ip failed"]
         }))
         return
       }
@@ -56,24 +50,61 @@ export default function App() {
     })
        
   }, [])
-  console.log(userData)
+  // get location data after knowing the IP
+  useEffect(() => {
+    if (/\d+(\.\d+){3}/.test(userData.user_ip)) {
+        fetch(`https://api.apilayer.com/ip_to_location/${userData.user_ip}`, {
+            method: "GET",
+            headers: {
+                "apikey": api_keys.ipToLocation
+            }
+        }).
+        then(resp => {
+            if (resp.ok) {
+                return resp.json()
+            }
+            else {
+                setUserData(prevData => ({
+                    ...prevData,
+                    errors: [...prevData.errors, "location to ip failed"]
+                }))
+            }
+        }).
+        then(data => {
+          setUserData(prevData => ({
+                ...prevData,
+                country_name: data.country_name,
+                country_code: data.country_code,
+                city_name: data.city,
+                latitude: data.latitude,
+                longitude: data.longitude,
+            }))
+        })
+    }
 
+}, [userData.user_ip])
 
-
-
-  /*
-  
-  */
- 
  return (
    <div className="App">
-      <Weather 
+      <Navbar 
+        api_keys={api_keys}
         userData={userData}
         setUserData={setUserData}
-     
-
       />
     </div>
   )
 }
 
+
+
+  //localStorage.clear()
+  
+/*
+  function toLocalStorage() {
+
+    localStorage.setItem("personal_panel", JSON.stringify(userData))
+  }
+  function fromLocalStorage() {
+    return JSON.parse(localStorage.getItem("personal_panel"))
+  }
+  */
