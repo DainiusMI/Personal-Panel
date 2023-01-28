@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import Navbar from './assets/components/Navbar'
-
+import Settings from './assets/components/Settings'
 
 
 // get IP from:
@@ -21,10 +21,12 @@ export default function App() {
 
   const [userData, setUserData] = useState({
     user_ip: "",
+    user_name: "user",
     units: "metric",
+    city_name: "",
     errors: []
   })
-
+  console.log(userData)
   // get IP
   useEffect(() => {
     fetch("https://api.bigdatacloud.net/data/client-ip").
@@ -88,6 +90,10 @@ export default function App() {
    <div className="App">
       <Navbar 
         api_keys={api_keys}
+        userData={userData}
+        setUserData={setUserData}
+      />
+      <Settings
         userData={userData}
         setUserData={setUserData}
       />

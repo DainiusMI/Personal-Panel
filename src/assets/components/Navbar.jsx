@@ -40,7 +40,7 @@ export default function Navbar({api_keys, userData, setUserData}) {
                 feels_like: data.main.feels_like,
             })
         })
-    }, [userData.latitude, userData.longitude])
+    }, [userData.latitude, userData.longitude, userData.units])
 
 
     const handleMouseOver = (event) => { setGadgetState({hovered: event.target.id}) }
@@ -64,7 +64,7 @@ export default function Navbar({api_keys, userData, setUserData}) {
     return (
         <nav className="navbar"
         >   
-            <p className="user__name"><strong>DainiusMI</strong></p>
+            <p className="user__name"><strong>{userData.user_name}</strong></p>
             <div className="weather__gadget">
 
                 <div className="gadget__main">
