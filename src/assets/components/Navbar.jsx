@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import NavbarWeather from "./NavbarWeather";
-
+import "../css/Navbar.css"
 
 
 export default function Navbar({api_keys, userData, setUserData}) {
@@ -52,15 +52,17 @@ export default function Navbar({api_keys, userData, setUserData}) {
                 break;
             case "gadget__temp": 
                 return <FeelsLike currentWeather={currentWeather} userData={userData}/>
+            case "gadget__city": 
+                return <CityMessage />
             case "gadget__icon":
                 return <WeatherDescription currentWeather={currentWeather} />
             
         }
     }
     return (
-        <nav id="navbar"
-        >
-            
+        <nav className="navbar"
+        >   
+            <p className="user__name"><strong>DainiusMI</strong></p>
             <div className="weather__gadget">
 
                 <div className="gadget__main">
@@ -71,6 +73,8 @@ export default function Navbar({api_keys, userData, setUserData}) {
                     >{currentWeather.temp} <span>{userData.units === "metric" ? " °C" : " °F"}</span></p>
                     <p 
                         id="gadget__city" 
+                        onMouseOver={handleMouseOver}
+                        onMouseOut={handleMouseOut}
                     >@ {userData.city_name}</p>
                     {
                         currentWeather.icon &&
@@ -94,7 +98,7 @@ export default function Navbar({api_keys, userData, setUserData}) {
 
 function FeelsLike({currentWeather, userData}) {
     return (
-        <div className="gadget__extra weather">
+        <div className="gadget__extra feels__like">
             <p className="gadget__extra__text">Feels like {currentWeather.feels_like} <span>{userData.units === "metric" ? " °C" : " °F"}</span></p>
         </div>
     )
@@ -102,8 +106,16 @@ function FeelsLike({currentWeather, userData}) {
 
 function WeatherDescription({currentWeather}) {
     return (
-        <div className="gadget__extra weather">
+        <div className="gadget__extra temp">
             <p className="gadget__extra__text">{currentWeather.description}</p>
+        </div>
+    )
+}
+
+function CityMessage() {
+    return (
+        <div className="gadget__extra city">
+            <p className="gadget__extra__text">If displayed city is incorrect you can set it manually in settings</p>
         </div>
     )
 }

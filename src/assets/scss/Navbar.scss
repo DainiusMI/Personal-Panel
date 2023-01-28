@@ -1,0 +1,38 @@
+
+@use "./mixins" as *;
+
+
+.navbar {
+    @include flex(row, center, space-between);
+
+}
+
+
+.weather__gadget {
+    @include flex(column, flex-start, center);
+    position: relative;
+    .gadget__main {
+        @include flex(row, center, flex-start);
+        gap: .7rem;
+        
+        .gadget__temp {
+
+        }
+        .gadget__city {
+
+        }
+        .gadget__icon {
+            
+        }
+    }
+    .gadget__extra {
+        position: absolute;
+        bottom: 0;
+
+        transform: translateY(80%);
+
+        .gadget__extra__text {
+            
+        }
+    }   
+}
