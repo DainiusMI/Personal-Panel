@@ -26,7 +26,6 @@ export default function App() {
     city_name: "",
     errors: []
   })
-  console.log(userData)
   // get IP
   useEffect(() => {
     fetch("https://api.bigdatacloud.net/data/client-ip").
