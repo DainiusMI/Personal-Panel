@@ -26,6 +26,7 @@ export default function App() {
     city_name: "",
     errors: []
   })
+  userData.errors.length > 0 && console.log(userData.errors)
   // get IP
   useEffect(() => {
     fetch("https://api.bigdatacloud.net/data/client-ip").
@@ -93,6 +94,7 @@ export default function App() {
         setUserData={setUserData}
       />
       <Settings
+        api_keys={api_keys}
         userData={userData}
         setUserData={setUserData}
       />

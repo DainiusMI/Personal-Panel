@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 
-export default function Settings({userData, setUserData}) {
+export default function Settings({api_keys, userData, setUserData}) {
 
     const [settingsData, setSettingsData] = useState({
         user_name: "",
@@ -24,11 +24,34 @@ export default function Settings({userData, setUserData}) {
             }
         })
     }
+    const [cityError, setCityError] = useState()
     function handleSave() {
-        setUserData(prevData => ({
-            ...prevData,
-            ...settingsData
-        }))
+        if (userData.city_name !== settingsData.city_name) {
+            fetch(`https://api.openweathermap.org/data/2.5/weather?q=${settingsData.city_name}&appid=${api_keys.openedWeatherMap}`).
+                then(resp => {
+                    if (resp.ok) {
+                        return resp.json()
+                    }
+                    else {
+                        setCityError(`City named ${settingsData.city_name} was not found`)
+                    }
+                }).
+                then(data => {
+                    setUserData(prevData => ({
+                        ...prevData,
+                        ...settingsData,
+                        latitude: data.coord.lat,
+                        longitude: data.coord.lon
+                    }))
+
+                })
+        }
+        else {
+            setUserData(prevData => ({
+                ...prevData,
+                ...settingsData
+            }))
+        }
     }
 
     return (
@@ -86,7 +109,8 @@ export default function Settings({userData, setUserData}) {
                         />
                     </label>
             </div>
-            <button onClick={handleSave}>Save Changes</button>
+            <button >Cancel</button>
+            <button onClick={handleSave}>Save</button>
         </div>
     )
 }

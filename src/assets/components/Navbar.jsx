@@ -10,13 +10,14 @@ export default function Navbar({api_keys, userData, setUserData}) {
     const [currentWeather, setCurrentWeather] = useState({})
     //future feature
     const [currentAlerts, setCurrentAlerts] = useState({
-        wind_speed: "data.wind.speed",
-        wind_gust: "data.wind.gust",
-        rain: "data.rain.1h",
-        snow: "data.snow.1h"
+        wind_speed: "",
+        wind_gust: "",
+        rain: "",
+        snow: ""
     })
 
     useEffect(() => {
+        console.log("triggered")
         if (userData.latitude === undefined || userData.longitude === undefined) {
             return
         }
@@ -39,9 +40,14 @@ export default function Navbar({api_keys, userData, setUserData}) {
                 temp: data.main.temp,
                 feels_like: data.main.feels_like,
             })
+            setCurrentAlerts({
+                wind_speed: data.wind.speed,
+                wind_gust: data.wind.gust,
+                rain: data.rain !== undefined ? data.rain["1h"] : "none",
+                snow: data.snow !== undefined ? data.snow["1h"] : "none"
+            })
         })
     }, [userData.latitude, userData.longitude, userData.units])
-
 
     const handleMouseOver = (event) => { setGadgetState({hovered: event.target.id}) }
     const handleMouseOut = () => { setGadgetState({hovered: null}) }
