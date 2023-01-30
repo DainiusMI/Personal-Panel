@@ -2,5 +2,74 @@
 
 
 .settings {
-    width: 100%;
+    width: 20rem;
+    @include flex(column, flex-start, flex-end);
+    gap: .5rem;
+    padding: 3rem;
+    border-bottom: 1px solid black;
+    
+    label {
+        @include flex(row, center, flex-start);
+        gap: .3rem;
+        cursor: pointer;
+        input {
+            height: 1.5rem;
+            text-indent: .5rem;
+            margin-left: 3rem;
+        }
+    }
+    
+    .settings__city,
+    .settings__username {
+        label {
+            @include flex(column, flex-start, center);
+            gap: .3rem;            
+            input {
+            }
+        }
+    }
+    .settings__username {
+
+    }
+
+    .settings__units {
+        
+        .units__text {
+            margin-bottom: .5rem
+        }
+        .units__radio__container {
+            @include flex(column, flex-start, center);
+        }
+    }
+
+    .settings__city {
+        &>*:last-child {
+           @include flex(row, center, flex-start);
+           input {
+             margin-right: .5rem;
+           }
+        }
+    }
+    .settings__buttons {
+        width: 100%;
+        @include flex(row, center, center);
+        gap: .5rem;
+        margin-top: 1.5rem;
+        &>button {
+            cursor: pointer;
+            width: 7rem;
+            height: 2rem;
+            &:hover {
+                color: #FFF;
+                border: none;
+            }
+        }
+        :first-child:hover {
+            background-color: rgb(78, 78, 248);
+        }
+        :last-child:hover {
+            background-color: rgb(255, 90, 61);
+        }
+    }
+
 }

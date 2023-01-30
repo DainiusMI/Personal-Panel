@@ -24,6 +24,7 @@ export default function App() {
     user_name: "user",
     units: "metric",
     city_name: "",
+    manual_city: false,
     errors: []
   })
   userData.errors.length > 0 && console.log(userData.errors)

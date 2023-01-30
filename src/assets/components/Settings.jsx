@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import "../css/Settings.css"
 
 export default function Settings({api_keys, userData, setUserData}) {
 
@@ -41,7 +42,8 @@ export default function Settings({api_keys, userData, setUserData}) {
                         ...prevData,
                         ...settingsData,
                         latitude: data.coord.lat,
-                        longitude: data.coord.lon
+                        longitude: data.coord.lon,
+                   
                     }))
 
                 })
@@ -71,29 +73,32 @@ export default function Settings({api_keys, userData, setUserData}) {
             </div>
             <div className="settings__units">
                 <p className='units__text'>Change Measuring Units:</p>
-                <label htmlFor="metric">Metric 
-                    <input 
-                        id="metric" 
-                        type="radio" 
-                        
-                        value="metric" 
-                        name="units" 
-                        checked={settingsData.units === "metric"}
-                        onChange={handleChange}
-                    />
-                
-                </label>
-                <label htmlFor="imperial">imperial 
-                    <input 
-                        id="imperial" 
-                        type="radio" 
-                        
-                        value="imperial" 
-                        name="units" 
-                        checked={settingsData.units === "imperial"}
-                        onChange={handleChange}
-                    />
-                </label>
+                <div className="units__radio__container">
+                    <label htmlFor="metric">
+                        <input 
+                            id="metric" 
+                            type="radio" 
+                            
+                            value="metric" 
+                            name="units" 
+                            checked={settingsData.units === "metric"}
+                            onChange={handleChange}
+                        />
+                        Metric 
+                    </label>
+                    <label htmlFor="imperial">
+                        <input 
+                            id="imperial" 
+                            type="radio" 
+                            
+                            value="imperial" 
+                            name="units" 
+                            checked={settingsData.units === "imperial"}
+                            onChange={handleChange}
+                        />
+                        Imperial 
+                    </label>
+                </div>
                 
                 
             </div>
@@ -107,10 +112,16 @@ export default function Settings({api_keys, userData, setUserData}) {
                             value={settingsData.city_name}
                             onChange={handleChange}
                         />
-                    </label>
+                </label>
+                <label htmlFor="city_remember">
+                    <input type="checkbox" name="city_remember" id="city_remember" />
+                    Remember
+                </label>
             </div>
-            <button >Cancel</button>
-            <button onClick={handleSave}>Save</button>
+            <div className="settings__buttons">
+                <button onClick={handleSave}>Save</button>
+                <button >Cancel</button>
+            </div>
         </div>
     )
 }
