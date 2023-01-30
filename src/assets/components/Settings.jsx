@@ -6,13 +6,15 @@ export default function Settings({api_keys, userData, setUserData}) {
     const [settingsData, setSettingsData] = useState({
         user_name: "",
         units: "",
-        city_name: ""
+        city_name: "",
+        city_remember: false
     })
     useEffect(() => {
         setSettingsData({
             user_name: userData.user_name,
             units: userData.units,
-            city_name: userData.city_name
+            city_name: userData.city_name,
+            city_remember: userData.city_remember
         })
     }, [userData.user_name, userData.units, userData.city_name])
 
@@ -114,7 +116,13 @@ export default function Settings({api_keys, userData, setUserData}) {
                         />
                 </label>
                 <label htmlFor="city_remember">
-                    <input type="checkbox" name="city_remember" id="city_remember" />
+                    <input 
+                        type="checkbox" 
+                        name="city_remember" 
+                        id="city_remember" 
+                        checked={settingsData.city_remember}
+                        onChange={handleChange}
+                    />
                     Remember
                 </label>
             </div>

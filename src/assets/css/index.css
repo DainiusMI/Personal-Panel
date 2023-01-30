@@ -1,4 +1,9 @@
 * {
   padding: 0;
   margin: 0;
+}
+
+.App {
+  width: 100vw;
+  position: relative;
 }/*# sourceMappingURL=index.css.map */

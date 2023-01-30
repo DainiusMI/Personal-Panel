@@ -2,12 +2,17 @@
 
 
 .settings {
-    width: 20rem;
+    width: 25rem;
     @include flex(column, flex-start, flex-end);
     gap: .5rem;
     padding: 3rem;
+
+    border-inline: 1px solid black;
     border-bottom: 1px solid black;
+    border-radius: 0 0 .5rem .5rem;
     
+    position: absolute;
+    right: 0;
     label {
         @include flex(row, center, flex-start);
         gap: .3rem;

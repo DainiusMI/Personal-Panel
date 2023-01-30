@@ -19,15 +19,29 @@ export default function App() {
   }
 
 
-  const [userData, setUserData] = useState({
+  const [userData, setUserData] = useState(fromLocalStorage() || {
     user_ip: "",
     user_name: "user",
     units: "metric",
     city_name: "",
-    manual_city: false,
+    city_remember: false,
     errors: []
   })
+
   userData.errors.length > 0 && console.log(userData.errors)
+
+  //localStorage.clear()
+
+  function toLocalStorage() {
+    localStorage.setItem("personal_panel", JSON.stringify(userData))
+  }
+  useEffect(() => {
+    toLocalStorage()
+  }, [userData])
+  function fromLocalStorage() {
+    return JSON.parse(localStorage.getItem("personal_panel"))
+  }
+
   // get IP
   useEffect(() => {
     fetch("https://api.bigdatacloud.net/data/client-ip").
@@ -74,14 +88,16 @@ export default function App() {
             }
         }).
         then(data => {
-          setUserData(prevData => ({
-                ...prevData,
-                country_name: data.country_name,
-                country_code: data.country_code,
-                city_name: data.city,
-                latitude: data.latitude,
-                longitude: data.longitude,
-            }))
+          if (userData.city_remember === false) {
+            setUserData(prevData => ({
+                  ...prevData,
+                  country_name: data.country_name,
+                  country_code: data.country_code,
+                  city_name: data.city,
+                  latitude: data.latitude,
+                  longitude: data.longitude,
+              }))
+          }
         })
     }
 
@@ -105,14 +121,3 @@ export default function App() {
 
 
 
-  //localStorage.clear()
-  
-/*
-  function toLocalStorage() {
-
-    localStorage.setItem("personal_panel", JSON.stringify(userData))
-  }
-  function fromLocalStorage() {
-    return JSON.parse(localStorage.getItem("personal_panel"))
-  }
-  */
