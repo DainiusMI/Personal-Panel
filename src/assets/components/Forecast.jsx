@@ -4,15 +4,29 @@ import React, {useState, useEffect} from "react";
 export default function Forecast({api_keys, userData, setUserData, setOpenedTab}) {
 
     const [forecastData, setForecastData] = useState()
-    const days = 5
-    
+    console.log(forecastData)
     const [year, month, today] = [
         new Date().getFullYear(),
         new Date().getMonth(),
-        new Date().getDate(),
+        new Date().getDate()
     ]
-    function sortForecast(data) {
-        
+    function sortForecast(list) {
+        let target_dt = ""
+        let daysForecast = []
+        let allDays = {}
+        list.map(data => {
+            if (target_dt === data.dt_txt.split(" ")[0]) {
+                daysForecast.push(data)
+            }
+            else {
+                if (daysForecast.length > 0) {
+                    allDays[target_dt] = [daysForecast]
+                }
+                target_dt = data.dt_txt.split(" ")[0]
+                daysForecast = []
+            }
+        })
+        setForecastData(allDays)
     }
     useEffect(() => {
         if (userData.latitude === undefined || userData.longitude === undefined) {
@@ -31,7 +45,7 @@ export default function Forecast({api_keys, userData, setUserData, setOpenedTab}
                 }
             }).
             then(data => {
-                console.log(data)
+                sortForecast(data.list)
             })
         
     }, [userData.latitude, userData.longitude, userData.units])

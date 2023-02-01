@@ -41,6 +41,7 @@ export default function App() {
   }, [userData])
   function fromLocalStorage() {
     const dataObject = JSON.parse(localStorage.getItem("personal_panel"))
+    // clear errrors after reading
     dataObject.errors = []
     return dataObject
   }
