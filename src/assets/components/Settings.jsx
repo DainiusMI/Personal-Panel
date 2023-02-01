@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import "../css/Settings.css"
 
-export default function Settings({api_keys, userData, setUserData}) {
+export default function Settings({api_keys, userData, setUserData, setOpenedTab}) {
 
     const [settingsData, setSettingsData] = useState({
         user_name: "",
@@ -128,7 +128,7 @@ export default function Settings({api_keys, userData, setUserData}) {
             </div>
             <div className="settings__buttons">
                 <button onClick={handleSave}>Save</button>
-                <button >Cancel</button>
+                <button onClick={() => {setOpenedTab("none")}} >Cancel</button>
             </div>
         </div>
     )

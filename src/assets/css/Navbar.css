@@ -64,9 +64,8 @@
   text-transform: capitalize;
 }
 
-#expand__forecast {
-  height: calc(95% - 3px);
-}
+#settings,
+#expand__forecast,
 #gadget__icon {
   height: calc(95% - 3px);
 }/*# sourceMappingURL=Navbar.css.map */

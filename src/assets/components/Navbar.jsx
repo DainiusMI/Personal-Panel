@@ -63,6 +63,8 @@ export default function Navbar({api_keys, userData, setUserData, openedTab, hand
                 return <CityMessage />
             case "gadget__icon":
                 return <WeatherDescription currentWeather={currentWeather} />
+            case "settings": 
+                return <SettingsMessage />
             
         }
     }
@@ -75,6 +77,7 @@ export default function Navbar({api_keys, userData, setUserData, openedTab, hand
                 <div className="gadget__main">
 
                     <i 
+                        id="expand__forecast"
                         className={openedTab === "forecast" ? "fa-solid fa-chevron-up" : "fa-solid fa-chevron-down"}
                         onMouseOver={handleMouseOver}
                         onMouseOut={handleMouseOut}
@@ -103,16 +106,21 @@ export default function Navbar({api_keys, userData, setUserData, openedTab, hand
                             onMouseOut={handleMouseOut}
                         />
                     }
+                    <i 
+                        id="settings"
+                        className="settings__icon fa-solid fa-gear"
+                        data-tab="settings"
+                        onClick={handleOpenedTab}
+
+                        onMouseOver={handleMouseOver}
+                        onMouseOut={handleMouseOut}
+                    />
                 </div>
+
                 {
                     switchExtras()
                 }
             </div>
-            <i 
-                className="settings__icon fa-solid fa-gear"
-                data-tab="settings"
-                onClick={handleOpenedTab}
-            />
         </nav>
     )
 }
@@ -145,6 +153,14 @@ function CityMessage() {
     return (
         <div className="gadget__extra city">
             <p className="gadget__extra__text">If displayed city is incorrect you can set it manually in settings</p>
+        </div>
+    )
+}
+
+function SettingsMessage() {
+    return (
+        <div className="gadget__extra gadget__settings)">
+            <p className="gadget__extra__text">Settings</p>
         </div>
     )
 }

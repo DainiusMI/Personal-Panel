@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import Navbar from './assets/components/Navbar'
 import Settings from './assets/components/Settings'
-
+import Forecast from './assets/components/Forecast'
 
 // get IP from:
 // https://api.bigdatacloud.net/data/client-ip
@@ -40,7 +40,9 @@ export default function App() {
     toLocalStorage()
   }, [userData])
   function fromLocalStorage() {
-    return JSON.parse(localStorage.getItem("personal_panel"))
+    const dataObject = JSON.parse(localStorage.getItem("personal_panel"))
+    dataObject.errors = []
+    return dataObject
   }
 
   // get IP
@@ -127,8 +129,15 @@ const handleOpenedTab = (event) => {
           api_keys={api_keys}
           userData={userData}
           setUserData={setUserData}
+          setOpenedTab={setOpenedTab}
         />
       }
+      <Forecast
+          api_keys={api_keys}
+          userData={userData}
+          setUserData={setUserData}
+          setOpenedTab={setOpenedTab}
+      />
     </div>
   )
 }
