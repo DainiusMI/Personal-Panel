@@ -7,10 +7,12 @@
   padding-inline: 1rem;
   border-bottom: 1px solid black;
 }
+.navbar > * {
+  cursor: pointer;
+}
 .navbar .settings__icon {
   font-size: 1.5rem;
 }
-
 .weather__gadget {
   display: flex;
   flex-direction: row;

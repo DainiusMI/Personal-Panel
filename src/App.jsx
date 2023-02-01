@@ -19,6 +19,7 @@ export default function App() {
   }
 
 
+
   const [userData, setUserData] = useState(fromLocalStorage() || {
     user_ip: "",
     user_name: "user",
@@ -103,18 +104,31 @@ export default function App() {
 
 }, [userData.user_ip])
 
+const [openedTab, setOpenedTab] = useState("none")
+
+const handleOpenedTab = (event) => {
+  openedTab === event.target.dataset.tab ?
+    setOpenedTab("none") :
+    setOpenedTab(event.target.dataset.tab)
+}
+
  return (
    <div className="App">
       <Navbar 
         api_keys={api_keys}
         userData={userData}
         setUserData={setUserData}
+        openedTab={openedTab}
+        handleOpenedTab={handleOpenedTab}
       />
-      <Settings
-        api_keys={api_keys}
-        userData={userData}
-        setUserData={setUserData}
-      />
+      {
+        openedTab === "settings" &&
+        <Settings
+          api_keys={api_keys}
+          userData={userData}
+          setUserData={setUserData}
+        />
+      }
     </div>
   )
 }

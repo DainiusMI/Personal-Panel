@@ -3,7 +3,7 @@ import React, {useState, useEffect} from "react";
 import "../css/Navbar.css"
 
 
-export default function Navbar({api_keys, userData, setUserData}) {
+export default function Navbar({api_keys, userData, setUserData, openedTab, handleOpenedTab}) {
 
     const [gadgetState, setGadgetState] = useState({hovered: null})
 
@@ -17,7 +17,6 @@ export default function Navbar({api_keys, userData, setUserData}) {
     })
 
     useEffect(() => {
-        console.log("triggered")
         if (userData.latitude === undefined || userData.longitude === undefined) {
             return
         }
@@ -76,10 +75,11 @@ export default function Navbar({api_keys, userData, setUserData}) {
                 <div className="gadget__main">
 
                     <i 
-                        id="expand__forecast" 
-                        className="fa-solid fa-chevron-down"
+                        className={openedTab === "forecast" ? "fa-solid fa-chevron-up" : "fa-solid fa-chevron-down"}
                         onMouseOver={handleMouseOver}
                         onMouseOut={handleMouseOut}
+                        data-tab="forecast"
+                        onClick={handleOpenedTab}
                     />
 
 
@@ -108,7 +108,11 @@ export default function Navbar({api_keys, userData, setUserData}) {
                     switchExtras()
                 }
             </div>
-            <i className="settings__icon fa-solid fa-gear"/>
+            <i 
+                className="settings__icon fa-solid fa-gear"
+                data-tab="settings"
+                onClick={handleOpenedTab}
+            />
         </nav>
     )
 }
