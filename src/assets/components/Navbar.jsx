@@ -85,7 +85,6 @@ export default function Navbar({api_keys, userData, setUserData, openedTab, hand
                         onClick={handleOpenedTab}
                     />
 
-
                     <p 
                         id="gadget__temp" 
                         onMouseOver={handleMouseOver}
