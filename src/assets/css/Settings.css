@@ -6,6 +6,7 @@
   justify-content: flex-end;
   gap: 0.5rem;
   padding: 3rem;
+  background-color: #FFF;
   border-inline: 1px solid black;
   border-bottom: 1px solid black;
   border-radius: 0 0 0.5rem 0.5rem;

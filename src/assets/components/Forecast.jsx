@@ -11,6 +11,7 @@ export default function Forecast({api_keys, userData, setUserData, setOpenedTab}
         new Date().getDate()
     ]
     function sortForecast(list) {
+        console.log(list)
         let target_dt = ""
         let daysForecast = []
         let allDays = {}
@@ -34,7 +35,7 @@ export default function Forecast({api_keys, userData, setUserData, setOpenedTab}
         if (userData.latitude === undefined || userData.longitude === undefined) {
             return
         }
-        fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${userData.longitude}&lon=${userData.longitude}&appid=${api_keys.openedWeatherMap}&units=${userData.units}`).
+        fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${userData.latitude}&lon=${userData.longitude}&appid=${api_keys.openedWeatherMap}&units=${userData.units}`).
             then(resp => {
                 if (resp.ok) {
                     return resp.json()

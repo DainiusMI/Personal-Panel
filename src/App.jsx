@@ -133,12 +133,15 @@ const handleOpenedTab = (event) => {
           setOpenedTab={setOpenedTab}
         />
       }
-      <Forecast
-          api_keys={api_keys}
-          userData={userData}
-          setUserData={setUserData}
-          setOpenedTab={setOpenedTab}
-      />
+      {
+        openedTab === "forecast" &&
+        <Forecast
+            api_keys={api_keys}
+            userData={userData}
+            setUserData={setUserData}
+            setOpenedTab={setOpenedTab}
+        />
+      }
     </div>
   )
 }
