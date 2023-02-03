@@ -1,0 +1,105 @@
+
+@use "./mixins" as *;
+
+
+.todo {
+    width: 100%;
+    height: 100%;
+
+    border: 1px solid black;
+
+    @include flex(row, center, center);
+
+    font-family: 'Reenie Beanie', sans-serif;
+    position: relative;
+    i {
+        cursor: pointer;
+    }
+
+}
+
+.add_note {
+    background:#ffc;
+    box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+
+    @include flex(row, center, center);
+
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: .5rem;
+
+    cursor: pointer;
+
+    position: absolute;
+    top: 3.5rem;
+    right: 1rem;
+    i {    
+        font-size: .7rem;
+    }
+
+    .todo__add__dummy__text {
+        font-weight: 600;
+    }
+    label {
+
+        height: 2rem;
+        @include flex(row, center, flex-start);
+        input {
+            border: none;
+            outline: none;
+            background-color: transparent;
+            text-indent: .2rem;
+            font-size: 1.32em;
+        }
+    }
+}
+
+
+
+
+.note__grid {
+    padding-top: 8rem;
+    list-style: none;
+    display: grid;
+    gap: 1.5rem;
+}
+
+.note {
+
+    height:10rem;
+    width:10rem;
+    padding:1rem;
+    background:#ffc;
+    box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+
+    position: relative;
+
+    &>*{
+        position: absolute;
+    }
+    .note__id {
+        top: .7rem;
+        left: .7rem;
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+    .note__text {
+        top: 2.5rem;
+        left: 1rem;
+        font-size: 1.8rem;
+        font-weight: 600;
+        word-wrap: break-word;
+    }
+    .note__actions {
+        top: .5rem;
+        right: .5rem;
+        i {
+            margin-left: .4rem;
+            font-size: .8rem;
+        }
+    }
+}
+
+.is__active {
+
+}

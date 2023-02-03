@@ -1,13 +1,17 @@
 
+@use "./mixins" as *;
+
 * {
     padding: 0;
     margin: 0;
 }
 body {
     overflow-x: hidden;
+    height: 100vh;
+    @include flex(column, flex-start, flex-start);
+    font-family: sans-serif;
 }
 .App {
     width: 100vw;
 
-    position:  relative;
 }

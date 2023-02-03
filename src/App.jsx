@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import Navbar from './assets/components/Navbar'
 import Settings from './assets/components/Settings'
 import Forecast from './assets/components/Forecast'
-
+import ToDo from './assets/components/ToDo'
 // get IP from:
 // https://api.bigdatacloud.net/data/client-ip
 
@@ -142,6 +142,9 @@ const handleOpenedTab = (event) => {
             setOpenedTab={setOpenedTab}
         />
       }
+      <ToDo
+
+      />
     </div>
   )
 }

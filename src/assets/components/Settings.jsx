@@ -56,6 +56,7 @@ export default function Settings({api_keys, userData, setUserData, setOpenedTab}
                 ...settingsData
             }))
         }
+        setOpenedTab("none")
     }
 
     return (

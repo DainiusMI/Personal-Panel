@@ -5,13 +5,8 @@ import "../css/Forecast.css"
 export default function Forecast({api_keys, userData, setUserData, setOpenedTab}) {
 
     const [forecastData, setForecastData] = useState()
-    const [year, month, today] = [
-        new Date().getFullYear(),
-        new Date().getMonth(),
-        new Date().getDate()
-    ]
+
     function sortForecast(list) {
-        console.log(list)
         let target_dt = ""
         let daysForecast = []
         let allDays = {}
@@ -53,8 +48,12 @@ export default function Forecast({api_keys, userData, setUserData, setOpenedTab}
         
     }, [userData.latitude, userData.longitude, userData.units])
 
+
     return (
-        <div className="forecast">
+        <div 
+            className="forecast" 
+            onClick={() => { setOpenedTab("none") }}
+        >
             {
                 forecastData &&
                 Object.keys(forecastData).map(key => {
@@ -73,11 +72,10 @@ export default function Forecast({api_keys, userData, setUserData, setOpenedTab}
 function ForecastDay({userData, daysDate, forecastData}) {
     const [description, setDescription] = useState(null)
     const data = forecastData[daysDate][0]
-    //console.log(forecastData)
-    //console.log(data)
+
     
     return (
-        <div className="forecast__day">
+        <div className="forecast__day" >
             <div className="forecast__day_title">{daysDate}</div>
             <div className="forecast__row">
                 {
