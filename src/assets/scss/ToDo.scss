@@ -83,7 +83,18 @@
         font-size: 1.5rem;
         font-weight: 600;
     }
-    .note__text {
+
+    .note__textarea {
+        width: calc(100% - 2rem);
+        height: 7.5rem;
+        resize: none;
+        outline: none;
+        border: none;
+        background-color: transparent;
+        font-family: 'Reenie Beanie', sans-serif;
+    }
+    .note__text,
+    .note__textarea {
         top: 2.5rem;
         left: 1rem;
         font-size: 1.8rem;
@@ -97,6 +108,11 @@
             margin-left: .4rem;
             font-size: .8rem;
         }
+    }
+    .save {
+        bottom: .5rem;
+        right: .5rem;
+        font-size: 1.5rem;
     }
 }
 

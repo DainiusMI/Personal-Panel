@@ -73,7 +73,17 @@
   font-size: 1.5rem;
   font-weight: 600;
 }
-.note .note__text {
+.note .note__textarea {
+  width: calc(100% - 2rem);
+  height: 7.5rem;
+  resize: none;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  font-family: "Reenie Beanie", sans-serif;
+}
+.note .note__text,
+.note .note__textarea {
   top: 2.5rem;
   left: 1rem;
   font-size: 1.8rem;
@@ -87,4 +97,9 @@
 .note .note__actions i {
   margin-left: 0.4rem;
   font-size: 0.8rem;
+}
+.note .save {
+  bottom: 0.5rem;
+  right: 0.5rem;
+  font-size: 1.5rem;
 }/*# sourceMappingURL=ToDo.css.map */
