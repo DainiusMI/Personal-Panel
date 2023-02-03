@@ -133,6 +133,10 @@ function Note({id, item, toDoData, setToDoData}) {
         }
         setToDoData(data)
     }
+    const deleteNote = () => {
+        const data = toDoData.filter((note, idx) => id !== idx && note)
+        setToDoData(data)
+    }
     return (
         <li 
             id={id}
@@ -160,6 +164,7 @@ function Note({id, item, toDoData, setToDoData}) {
                     />
                     <i 
                         className="fa-solid fa-trash"
+                        onClick={deleteNote}
                     />
                 </div>
             }
