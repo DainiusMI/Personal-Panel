@@ -103,36 +103,70 @@ function Note({id, item, toDoData, setToDoData}) {
         }
         setToDoData(data)
     }
-    const focusNote = () = {
-        
+    const focusNote = () => {
+        if (toDoData[id].isFocused === false && toDoData[id].input_active === false) {
+            const data = toDoData.map(note => {
+                return {
+                    ...note,
+                    isFocused: false,
+                    input_active: false
+                }
+            })
+            data[id] = {
+                ...data[id],
+                isFocused: true
+            }
+            setToDoData(data)
+        }
     }
-
+    const editNote = () => {
+        const data = toDoData.map(note => {
+            return {
+                ...note,
+                isFocused: false,
+                input_active: false
+            }
+        })
+        data[id] = {
+            ...data[id],
+            input_active: true
+        }
+        setToDoData(data)
+    }
     return (
-        <li className="note">
+        <li 
+            id={id}
+            className="note"
+            onClick={focusNote}
+        >
             <p className="note__id">#{id+1}</p>
-            {
-                toDoData[id].input_active && 
+            
+     
                 <textarea  
                     type="text"
                     className="note__textarea"
                     autoFocus
+                    readOnly={!toDoData[id].input_active}
                     value={noteData.text}
                     onChange={handleInput}
                 />
-            }
-            <p className="note__text">{item.text}</p>
+
             {
-                toDoData[id].isFocused && 
+                toDoData[id].input_active === false && toDoData[id].isFocused && 
                 <div className="note__actions">
-                    <i className="fa-solid fa-pen-to-square"/>
-                    <i className="fa-solid fa-trash"/>
+                    <i 
+                        className="fa-solid fa-pen-to-square"
+                        onClick={editNote}
+                    />
+                    <i 
+                        className="fa-solid fa-trash"
+                    />
                 </div>
             }
             {
                 toDoData[id].input_active && 
                 <i 
                     className="save fa-solid fa-check"
-                    data-note={id}
                     onClick={saveNote}
                 />
             }
