@@ -66,7 +66,6 @@ export default function ToDo() {
                     return <Note
                         key={`todo-${idx}`}
                         id={idx}
-                        item={item}
                         toDoData={toDoData}
                         setToDoData={setToDoData}
                     />
@@ -74,14 +73,13 @@ export default function ToDo() {
                 
             }
             </ul>
-            
         </div>
     )
 }
 
 
 
-function Note({id, item, toDoData, setToDoData}) {
+function Note({id, toDoData, setToDoData}) {
 
     const [noteData, setNoteData] = useState(toDoData[id])
     useEffect(() => {
@@ -140,21 +138,18 @@ function Note({id, item, toDoData, setToDoData}) {
     return (
         <li 
             id={id}
-            className="note"
+            className={toDoData[id].isFocused || toDoData[id].input_active  ? "focused note" : "note"}
             onClick={focusNote}
         >
             <p className="note__id">#{id+1}</p>
-            
-     
-                <textarea  
-                    type="text"
-                    className="note__textarea"
-                    autoFocus
-                    readOnly={!toDoData[id].input_active}
-                    value={noteData.text}
-                    onChange={handleInput}
-                />
-
+            <textarea  
+                type="text"
+                className="note__textarea"
+                autoFocus
+                readOnly={!toDoData[id].input_active}
+                value={noteData.text}
+                onChange={handleInput}
+            />
             {
                 toDoData[id].input_active === false && toDoData[id].isFocused && 
                 <div className="note__actions">

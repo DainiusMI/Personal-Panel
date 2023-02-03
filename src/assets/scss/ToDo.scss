@@ -15,8 +15,8 @@
     i {
         cursor: pointer;
     }
-
 }
+
 
 .add_note {
     background:#ffc;
@@ -53,8 +53,6 @@
         }
     }
 }
-
-
 
 
 .note__grid {
@@ -116,6 +114,26 @@
     }
 }
 
-.is__active {
 
+
+.note__grid .note {
+    transform: rotate(-6deg);
+}
+.note__grid .note:nth-child(even) {
+    transform:rotate(4deg);
+}
+.note__grid .note:nth-child(3n) {
+    transform:rotate(-3deg);
+    position:relative;
+    top:-5px;
+}
+.note__grid .note:nth-child(5n) {
+    transform:rotate(5deg);
+    position:relative;
+    top:-10px;
+}
+.note__grid .note.focused{
+    transform: scale(1.25);
+    position:relative;
+    z-index:99;
 }
