@@ -3,20 +3,7 @@ import "../css/ToDo.css"
 
 export default function ToDo() {
 
-    const [toDoData, setToDoData] = useState([
-        {
-            text: "First To Do is to check text wrap",
-            isFocused: false,
-            input_active: false
-        },
-        {
-            text: "First To Do is to check text wrap",
-            isFocused: false,
-            input_active: false
-        }
-    ])
-
-
+    const [toDoData, setToDoData] = useState([])
     
     const addNote = () => {
         const notActive = toDoData.map(note => {
@@ -45,7 +32,7 @@ export default function ToDo() {
             }
         }
     }
-    console.log(toDoData)
+
     return (
         <div className="todo">
             <div 
@@ -78,7 +65,6 @@ export default function ToDo() {
 }
 
 
-
 function Note({id, toDoData, setToDoData}) {
 
     const [noteData, setNoteData] = useState(toDoData[id])
@@ -92,6 +78,7 @@ function Note({id, toDoData, setToDoData}) {
             text: e.target.value
         }))
     }
+
     const saveNote = () => {
         const data = [...toDoData]
         data[id] = {
@@ -101,6 +88,7 @@ function Note({id, toDoData, setToDoData}) {
         }
         setToDoData(data)
     }
+    
     const cancelNote = () => {
         if (noteData.text.length === 0) {
             deleteNote()
@@ -108,8 +96,8 @@ function Note({id, toDoData, setToDoData}) {
         else {
             setToDoData(setInactive())
         }
-
     }
+
     const setInactive = () => {
         return toDoData.map(note => {
             return {
@@ -119,6 +107,7 @@ function Note({id, toDoData, setToDoData}) {
             }
         })
     }
+
     const focusNote = () => {
         if (toDoData[id].isFocused === false && toDoData[id].input_active === false) {
             const data = setInactive()
@@ -129,6 +118,7 @@ function Note({id, toDoData, setToDoData}) {
             setToDoData(data)
         }
     }
+
     const editNote = () => {
         const data = setInactive()
         data[id] = {
@@ -137,6 +127,7 @@ function Note({id, toDoData, setToDoData}) {
         }
         setToDoData(data)
     }
+
     const deleteNote = () => {
         const data = toDoData.filter((note, idx) => id !== idx && note)
         setToDoData(data)
@@ -152,6 +143,7 @@ function Note({id, toDoData, setToDoData}) {
             position: Math.floor(Math.random() * 10) * direction
         })
     }, [noteData.isFocused])
+
     const notesStyle = () => {
         return noteData.isFocused || noteData.input_active ?
             {
@@ -163,7 +155,6 @@ function Note({id, toDoData, setToDoData}) {
                 cursor: `pointer`
             }
     }
-
 
     return (
         <li 

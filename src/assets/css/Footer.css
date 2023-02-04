@@ -1,0 +1,30 @@
+.open__notes {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.5rem;
+  border: 0.05rem solid black;
+  border-radius: 1rem;
+  background: rgb(226, 226, 217);
+  background: linear-gradient(0deg, rgb(226, 226, 217) 0%, rgb(255, 255, 255) 100%);
+  font-weight: 600;
+  cursor: pointer;
+  z-index: 99;
+}
+.open__notes i {
+  margin-left: -0.3rem;
+}
+.open__notes:hover {
+  background: linear-gradient(180deg, rgb(226, 226, 217) 0%, rgb(255, 255, 255) 100%);
+}
+.open__notes.bottom {
+  bottom: 0.5rem;
+}
+.open__notes.top {
+  top: 3.5rem;
+}/*# sourceMappingURL=Footer.css.map */

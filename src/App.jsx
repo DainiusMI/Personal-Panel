@@ -3,6 +3,7 @@ import Navbar from './assets/components/Navbar'
 import Settings from './assets/components/Settings'
 import Forecast from './assets/components/Forecast'
 import ToDo from './assets/components/ToDo'
+import Footer from './assets/components/Foooter'
 // get IP from:
 // https://api.bigdatacloud.net/data/client-ip
 
@@ -107,8 +108,8 @@ export default function App() {
 
 }, [userData.user_ip])
 
-const [openedTab, setOpenedTab] = useState("todo")
-//const [openedTab, setOpenedTab] = useState("none")
+//const [openedTab, setOpenedTab] = useState("todo")
+const [openedTab, setOpenedTab] = useState("none")
 
 const handleOpenedTab = (event) => {
   openedTab === event.target.dataset.tab ?
@@ -143,13 +144,16 @@ const handleOpenedTab = (event) => {
             setOpenedTab={setOpenedTab}
         />
       }
-      {
-             openedTab === "todo" &&
-        <ToDo
-
-        />
-      }
-
+      <Footer 
+        openedTab={openedTab}
+        setOpenedTab={setOpenedTab}
+      />
+        {
+               openedTab === "todo" &&
+          <ToDo
+  
+          />
+        }
     </div>
   )
 }
