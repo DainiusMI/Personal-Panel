@@ -103,17 +103,22 @@
         word-wrap: break-word;
     }
     .note__actions {
-        top: .5rem;
-        right: .5rem;
+
         i {
             margin-left: .4rem;
             font-size: .8rem;
         }
     }
-    .save {
+    .actions__top {
+        top: .5rem;
+        right: .5rem;
+    }
+    .actions__bottom {
         bottom: .5rem;
         right: .5rem;
-        font-size: 1.5rem;
+        i {
+            font-size: 1.5rem;
+        }
     }
 }
 
@@ -134,8 +139,8 @@
 
     top:-10px;
 }
-*/
 .note__grid .note.focused{
     transform: scale(1.25);
     z-index:99;
 }
+*/

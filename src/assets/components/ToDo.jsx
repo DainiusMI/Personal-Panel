@@ -96,20 +96,32 @@ function Note({id, toDoData, setToDoData}) {
         const data = [...toDoData]
         data[id] = {
             text: noteData.text,
-            isFocused: true,
+            isFocused: false,
             input_active: false
         }
         setToDoData(data)
     }
+    const cancelNote = () => {
+        if (noteData.text.length === 0) {
+            deleteNote()
+        }
+        else {
+            setToDoData(setInactive())
+        }
+
+    }
+    const setInactive = () => {
+        return toDoData.map(note => {
+            return {
+                ...note,
+                isFocused: false,
+                input_active: false
+            }
+        })
+    }
     const focusNote = () => {
         if (toDoData[id].isFocused === false && toDoData[id].input_active === false) {
-            const data = toDoData.map(note => {
-                return {
-                    ...note,
-                    isFocused: false,
-                    input_active: false
-                }
-            })
+            const data = setInactive()
             data[id] = {
                 ...data[id],
                 isFocused: true
@@ -118,13 +130,7 @@ function Note({id, toDoData, setToDoData}) {
         }
     }
     const editNote = () => {
-        const data = toDoData.map(note => {
-            return {
-                ...note,
-                isFocused: false,
-                input_active: false
-            }
-        })
+        const data = setInactive()
         data[id] = {
             ...data[id],
             input_active: true
@@ -135,15 +141,27 @@ function Note({id, toDoData, setToDoData}) {
         const data = toDoData.filter((note, idx) => id !== idx && note)
         setToDoData(data)
     }
+    const direction = Math.random() > 0.5 ? -1 : 1
+    const [noteStyle, setNoteStyle] = useState({
 
+    })
+    useEffect(() => {
+        noteData.isFocused == false &&
+        setNoteStyle({
+            angle: Math.floor(Math.random() * 6 + 2) * direction,
+            position: Math.floor(Math.random() * 10) * direction
+        })
+    }, [noteData.isFocused])
     const notesStyle = () => {
-        const direction = id % 2 === 0 ? -1 : 1
-        const angle = Math.floor(Math.random() * 6 + 2) * direction
-        const position = Math.floor(Math.random() * 20)
-        return {
-            transform: `rotate(${angle}deg)`,
-            top: `${position}px`
-        }
+        return noteData.isFocused || noteData.input_active ?
+            {
+                transform: `scale(1.1)`
+            }:
+            {
+                transform: `rotate(${noteStyle.angle}deg)`,
+                top: `${noteStyle.position}px`,
+                cursor: `pointer`
+            }
     }
 
 
@@ -165,7 +183,7 @@ function Note({id, toDoData, setToDoData}) {
             />
             {
                 toDoData[id].input_active === false && toDoData[id].isFocused && 
-                <div className="note__actions">
+                <div className="note__actions actions__top">
                     <i 
                         className="fa-solid fa-pen-to-square"
                         onClick={editNote}
@@ -178,10 +196,17 @@ function Note({id, toDoData, setToDoData}) {
             }
             {
                 toDoData[id].input_active && 
-                <i 
-                    className="save fa-solid fa-check"
-                    onClick={saveNote}
-                />
+                <div className="note__actions actions__bottom">
+                    <i 
+                        className="save fa-solid fa-check"
+                        onClick={saveNote}
+                    />
+                    <i 
+                        className="fa-solid fa-xmark"
+                        onClick={cancelNote}
+                    />
+                </div>
+                
             }
         </li>
     )

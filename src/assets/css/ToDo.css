@@ -92,17 +92,19 @@
   font-weight: 600;
   word-wrap: break-word;
 }
-.note .note__actions {
-  top: 0.5rem;
-  right: 0.5rem;
-}
 .note .note__actions i {
   margin-left: 0.4rem;
   font-size: 0.8rem;
 }
-.note .save {
+.note .actions__top {
+  top: 0.5rem;
+  right: 0.5rem;
+}
+.note .actions__bottom {
   bottom: 0.5rem;
   right: 0.5rem;
+}
+.note .actions__bottom i {
   font-size: 1.5rem;
 }
 
@@ -122,8 +124,8 @@
 
     top:-10px;
 }
-*/
-.note__grid .note.focused {
-  transform: scale(1.25);
-  z-index: 99;
-}/*# sourceMappingURL=ToDo.css.map */
+.note__grid .note.focused{
+    transform: scale(1.25);
+    z-index:99;
+}
+*//*# sourceMappingURL=ToDo.css.map */
