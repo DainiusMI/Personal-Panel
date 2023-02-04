@@ -135,11 +135,24 @@ function Note({id, toDoData, setToDoData}) {
         const data = toDoData.filter((note, idx) => id !== idx && note)
         setToDoData(data)
     }
+
+    const notesStyle = () => {
+        const direction = id % 2 === 0 ? -1 : 1
+        const angle = Math.floor(Math.random() * 6 + 2) * direction
+        const position = Math.floor(Math.random() * 20)
+        return {
+            transform: `rotate(${angle}deg)`,
+            top: `${position}px`
+        }
+    }
+
+
     return (
         <li 
             id={id}
             className={toDoData[id].isFocused || toDoData[id].input_active  ? "focused note" : "note"}
             onClick={focusNote}
+            style={notesStyle()}
         >
             <p className="note__id">#{id+1}</p>
             <textarea  

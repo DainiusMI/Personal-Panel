@@ -107,7 +107,8 @@ export default function App() {
 
 }, [userData.user_ip])
 
-const [openedTab, setOpenedTab] = useState("none")
+const [openedTab, setOpenedTab] = useState("todo")
+//const [openedTab, setOpenedTab] = useState("none")
 
 const handleOpenedTab = (event) => {
   openedTab === event.target.dataset.tab ?
@@ -142,9 +143,13 @@ const handleOpenedTab = (event) => {
             setOpenedTab={setOpenedTab}
         />
       }
-      <ToDo
+      {
+             openedTab === "todo" &&
+        <ToDo
 
-      />
+        />
+      }
+
     </div>
   )
 }
