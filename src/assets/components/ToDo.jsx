@@ -4,13 +4,18 @@ import "../css/ToDo.css"
 export default function ToDo() {
 
     const [toDoData, setToDoData] = useState([])
-    
-    const addNote = () => {
-        const notActive = toDoData.map(note => {
-            return {...note, isFocused: false, input_active: false}
+    const setInactive = () => {
+        return toDoData.map(note => {
+            return {
+                ...note,
+                isFocused: false,
+                input_active: false
+            }
         })
+    }
+    const addNote = () => {
         setToDoData([
-            ...notActive,
+            ...setInactive(),
             {
                 text: "",
                 isFocused: true,
@@ -49,12 +54,13 @@ export default function ToDo() {
             >
             {
                 
-                toDoData.map((item, idx) => {
+                toDoData.map((item, index) => {
                     return <Note
-                        key={`todo-${idx}`}
-                        id={idx}
+                        key={`todo-${index}`}
+                        id={index}
                         toDoData={toDoData}
                         setToDoData={setToDoData}
+                        setInactive={setInactive}
                     />
                 })
                 
@@ -65,7 +71,7 @@ export default function ToDo() {
 }
 
 
-function Note({id, toDoData, setToDoData}) {
+function Note({id, toDoData, setToDoData, setInactive}) {
 
     const [noteData, setNoteData] = useState(toDoData[id])
     useEffect(() => {
@@ -98,15 +104,7 @@ function Note({id, toDoData, setToDoData}) {
         }
     }
 
-    const setInactive = () => {
-        return toDoData.map(note => {
-            return {
-                ...note,
-                isFocused: false,
-                input_active: false
-            }
-        })
-    }
+
 
     const focusNote = () => {
         if (toDoData[id].isFocused === false && toDoData[id].input_active === false) {

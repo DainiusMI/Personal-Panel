@@ -16,7 +16,8 @@ export default function App() {
 
   const api_keys = {
     openedWeatherMap: "b3f5fab1dae2062b7cd950a48a936e79",
-    ipToLocation: "3K7hAsyNM17mPQf6SuYWr9B6KY8kY6f0"
+    ipToLocation: "3K7hAsyNM17mPQf6SuYWr9B6KY8kY6f0",
+    unsplash: "MIxz9_aBuCzBElEKHhglqcLPlVS4NbtJdyAJGXelVKo"
   }
 
 
@@ -144,10 +145,13 @@ const handleOpenedTab = (event) => {
             setOpenedTab={setOpenedTab}
         />
       }
-      <Footer 
-        openedTab={openedTab}
-        setOpenedTab={setOpenedTab}
-      />
+      {
+        openedTab !== "forecast" &&
+        <Footer 
+          openedTab={openedTab}
+          setOpenedTab={setOpenedTab}
+        />
+      }
         {
                openedTab === "todo" &&
           <ToDo
