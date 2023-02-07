@@ -2,22 +2,19 @@ import React, {useState, useEffect} from 'react'
 import Navbar from './assets/components/Navbar'
 import Settings from './assets/components/Settings'
 import Forecast from './assets/components/Forecast'
+import Background from './assets/components/Background'
 import ToDo from './assets/components/ToDo'
 import Footer from './assets/components/Foooter'
-// get IP from:
-// https://api.bigdatacloud.net/data/client-ip
 
 
-// https://app.supabase.com/project/zbhpohptkdsrrkjqwqol/editor/27042
-// db password
-// xSwwS2kwqTAZLSIr
 
 export default function App() {
 
   const api_keys = {
     openedWeatherMap: "b3f5fab1dae2062b7cd950a48a936e79",
     ipToLocation: "3K7hAsyNM17mPQf6SuYWr9B6KY8kY6f0",
-    unsplash: "MIxz9_aBuCzBElEKHhglqcLPlVS4NbtJdyAJGXelVKo"
+    unsplash: "MIxz9_aBuCzBElEKHhglqcLPlVS4NbtJdyAJGXelVKo",
+    api_ninjas: "/o/LAoa+7TG7v1KX6dxsVg==9uyHCBOTmCjaGUSE"
   }
 
 
@@ -27,11 +24,10 @@ export default function App() {
     user_name: "user",
     units: "metric",
     city_name: "",
-    city_remember: false,
-    errors: []
+    city_remember: false
   })
 
-  userData.errors.length > 0 && console.log(userData.errors)
+
 
   //localStorage.clear()
 
@@ -43,8 +39,6 @@ export default function App() {
   }, [userData])
   function fromLocalStorage() {
     const dataObject = JSON.parse(localStorage.getItem("personal_panel"))
-    // clear errrors after reading
-    dataObject.errors = []
     return dataObject
   }
 
@@ -54,13 +48,6 @@ export default function App() {
     then(resp => {
       if (resp.ok) {
         return resp.json()
-      }
-      else {
-        setUserData(prevData => ({
-          ...prevData,
-          errors: [...prevData.errors, "client ip failed"]
-        }))
-        return
       }
     }).
     then(data => {
@@ -85,12 +72,6 @@ export default function App() {
         then(resp => {
             if (resp.ok) {
                 return resp.json()
-            }
-            else {
-                setUserData(prevData => ({
-                    ...prevData,
-                    errors: [...prevData.errors, "location to ip failed"]
-                }))
             }
         }).
         then(data => {
@@ -145,6 +126,10 @@ const handleOpenedTab = (event) => {
             setOpenedTab={setOpenedTab}
         />
       }
+      <Background
+          openedTab={openedTab}
+          api_keys={api_keys}
+      />
       {
         openedTab !== "forecast" &&
         <Footer 

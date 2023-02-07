@@ -35,9 +35,7 @@ export default function Settings({api_keys, userData, setUserData, setOpenedTab}
                     if (resp.ok) {
                         return resp.json()
                     }
-                    else {
-                        setCityError(`City named ${settingsData.city_name} was not found`)
-                    }
+
                 }).
                 then(data => {
                     setUserData(prevData => ({

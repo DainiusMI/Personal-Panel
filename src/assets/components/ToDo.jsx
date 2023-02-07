@@ -45,7 +45,7 @@ export default function ToDo() {
                 onClick={addNote}
             >
                 <i className="fa-solid fa-plus"/>
-                <p className="todo__add__dummy__text"> Add</p>
+                <p className="todo__add__dummy__text"> ADD</p>
             </div>
 
             <ul 
@@ -131,9 +131,7 @@ function Note({id, toDoData, setToDoData, setInactive}) {
         setToDoData(data)
     }
     const direction = Math.random() > 0.5 ? -1 : 1
-    const [noteStyle, setNoteStyle] = useState({
-
-    })
+    const [noteStyle, setNoteStyle] = useState({})
     useEffect(() => {
         noteData.isFocused == false &&
         setNoteStyle({

@@ -25,12 +25,6 @@ export default function Navbar({api_keys, userData, setUserData, openedTab, hand
                 if (resp.ok) {
                     return resp.json()
                 }
-                else {
-                    setUserData(prevData => ({
-                        ...prevData,
-                        errors: [...prevData.errors, "current weather failed"]
-                    }))
-                }
         }).
         then(data => {
             setCurrentWeather({
