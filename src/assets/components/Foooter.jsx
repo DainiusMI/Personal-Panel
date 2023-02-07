@@ -3,7 +3,6 @@ import "../css/Footer.css"
 
 export default function Footer({openedTab, setOpenedTab}) {
     const openToDo = () => {
-        console.log("click")
         if (openedTab === "todo") {
             setOpenedTab("none")
         }

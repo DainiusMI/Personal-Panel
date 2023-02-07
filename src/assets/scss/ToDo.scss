@@ -6,12 +6,14 @@
     width: 100%;
     height: 100%;
 
-
+    
 
     @include flex(row, center, center);
 
     font-family: 'Reenie Beanie', sans-serif;
-    position: relative;
+    position: absolute;
+    top: 1rem;
+
     i {
         cursor: pointer;
     }

@@ -6,13 +6,15 @@
     @include flex(column, flex-start, flex-end);
     gap: .5rem;
     padding: 3rem;
-    background-color: #FFF;
-    border-inline: 1px solid black;
-    border-bottom: 1px solid black;
+    background-color: #ffffff98;
+    
     border-radius: 0 0 .5rem .5rem;
     
     position: absolute;
+    top: 5rem;
     right: 0;
+
+    z-index: 99;
     label {
         @include flex(row, center, flex-start);
         gap: .3rem;
@@ -24,8 +26,10 @@
         }
     }
     
-    .settings__city,
-    .settings__username {
+    
+    .settings__username,
+    .settings_background,
+    .settings__city {
         label {
             @include flex(column, flex-start, center);
             gap: .3rem;            

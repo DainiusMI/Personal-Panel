@@ -12,37 +12,29 @@
     z-index: 1;
     &>*:first-child {
         
-        margin-top: 4rem;
+        margin-top: 6rem;
     }
-    &::before {
-        content: " ";
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.571);
-        position: absolute;
-        cursor: pointer
-    }
+
 }
 
 .forecast__day {
     @include flex(column, center, center);
     width: 90%;
     border: 1px solid black;
-    background-color: #fff;
+    background-color: #ffffff98;
 
     z-index: 90;
 
-    box-shadow: -3px 10px 5px 0px rgba(0,0,0,0.75);
-    -webkit-box-shadow: -3px 10px 5px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: -3px 10px 5px 0px rgba(0,0,0,0.75);
     .forecast__day_title {
         width: 100%;
         height: 3rem;
         line-height: 3rem;
         font-size: 1.2rem;
         text-align: center;
-        background: rgb(226,226,217);
-        background: linear-gradient(0deg, rgba(226,226,217,1) 0%, rgba(255,255,255,1) 100%);
+        color: #fff;
+        background: rgb(0,0,0);
+        background: linear-gradient(180deg, rgba(0,0,0,1) 0%,  rgba(27, 26, 26, 0.6) 70%, rgba(48, 48, 48, 0.1) 100%);
+
     }
     .forecast__row {
         width: 100%;

@@ -8,14 +8,8 @@ export default function Navbar({api_keys, userData, setUserData, openedTab, hand
     const [gadgetState, setGadgetState] = useState({hovered: null})
 
     const [currentWeather, setCurrentWeather] = useState({})
-    //future feature
-    const [currentAlerts, setCurrentAlerts] = useState({
-        wind_speed: "",
-        wind_gust: "",
-        rain: "",
-        snow: ""
-    })
 
+    console.log(gadgetState)
     useEffect(() => {
         if (userData.latitude === undefined || userData.longitude === undefined) {
             return
@@ -33,12 +27,6 @@ export default function Navbar({api_keys, userData, setUserData, openedTab, hand
                 temp: data.main.temp,
                 feels_like: data.main.feels_like,
             })
-            setCurrentAlerts({
-                wind_speed: data.wind.speed,
-                wind_gust: data.wind.gust,
-                rain: data.rain !== undefined ? data.rain["1h"] : "none",
-                snow: data.snow !== undefined ? data.snow["1h"] : "none"
-            })
         })
     }, [userData.latitude, userData.longitude, userData.units])
 
@@ -49,8 +37,10 @@ export default function Navbar({api_keys, userData, setUserData, openedTab, hand
         switch (gadgetState.hovered) {
             case null: 
                 break;
+            case "expand__todo": 
+                return <ToDoMessage openedTab={openedTab} />
             case "expand__forecast": 
-                return <ExpandForecast />
+                return <ExpandForecast openedTab={openedTab}/>
             case "gadget__temp": 
                 return <FeelsLike currentWeather={currentWeather} userData={userData}/>
             case "gadget__city": 
@@ -69,15 +59,34 @@ export default function Navbar({api_keys, userData, setUserData, openedTab, hand
             <div className="weather__gadget">
 
                 <div className="gadget__main">
+                    <div 
+                        id="expand__todo"
+                        className="gadget__notes"
 
-                    <i 
-                        id="expand__forecast"
-                        className={openedTab === "forecast" ? "fa-solid fa-chevron-up" : "fa-solid fa-chevron-down"}
                         onMouseOver={handleMouseOver}
                         onMouseOut={handleMouseOut}
+    
+                        data-tab="todo"
+                        onClick={handleOpenedTab}
+                    >
+                        <i className={openedTab === "todo" ? "fa-solid fa-chevron-up" : "fa-solid fa-chevron-down"} />
+                        <p className="gadget__text"> Notes</p>
+                    </div>
+                    
+                    <div 
+                        id="expand__forecast"
+                        className="gadget__forcast"
+
+                        onMouseOver={handleMouseOver}
+                        onMouseOut={handleMouseOut}
+
                         data-tab="forecast"
                         onClick={handleOpenedTab}
-                    />
+                        >
+
+                        <i className={openedTab === "forecast" ? "fa-solid fa-chevron-up" : "fa-solid fa-chevron-down"} />
+                        <p className="gadget__text"> Forecast</p>
+                    </div>
 
                     <p 
                         id="gadget__temp" 
@@ -118,10 +127,18 @@ export default function Navbar({api_keys, userData, setUserData, openedTab, hand
     )
 }
 
-function ExpandForecast() {
+function ToDoMessage({openedTab}) {
     return (
         <div className="gadget__extra ">
-            <p className="gadget__extra__text">Click to see more detailed forcast</p>
+            <p className="gadget__extra__text">{openedTab === "todo" ? "Click to hide your notes" : "Click to see your notes"}</p>
+        </div>
+    )
+}
+
+function ExpandForecast({openedTab}) {
+    return (
+        <div className="gadget__extra ">
+            <p className="gadget__extra__text">{openedTab === "forecast" ? "Click to close detailed forcast" : "Click to see more detailed forcast"}</p>
         </div>
     )
 }

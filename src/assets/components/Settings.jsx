@@ -6,6 +6,7 @@ export default function Settings({api_keys, userData, setUserData, setOpenedTab}
     const [settingsData, setSettingsData] = useState({
         user_name: "",
         units: "",
+        background: "",
         city_name: "",
         city_remember: false
     })
@@ -13,11 +14,11 @@ export default function Settings({api_keys, userData, setUserData, setOpenedTab}
         setSettingsData({
             user_name: userData.user_name,
             units: userData.units,
+            background: userData.background,
             city_name: userData.city_name,
             city_remember: userData.city_remember
         })
-    }, [userData.user_name, userData.units, userData.city_name])
-
+    }, [userData.user_name, userData.background, userData.units, userData.city_name])
     function handleChange(event) {
         const {name, value, type, checked} = event.target
         setSettingsData(prevData => {
@@ -102,6 +103,19 @@ export default function Settings({api_keys, userData, setUserData, setOpenedTab}
                 </div>
                 
                 
+            </div>
+            <div className="settings_background">
+                <label htmlFor="background">
+                    Background theme: 
+                    <input 
+                        id="background"
+                        type="text" 
+
+                        name="background" 
+                        value={settingsData.background}
+                        onChange={handleChange}
+                    />
+                </label>
             </div>
             <div className="settings__city">
                 <label htmlFor="city_name">Change the City: 

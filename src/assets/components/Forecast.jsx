@@ -50,10 +50,7 @@ export default function Forecast({api_keys, userData, setUserData, setOpenedTab}
 
 
     return (
-        <div 
-            className="forecast" 
-            onClick={() => { setOpenedTab("none") }}
-        >
+        <div className="forecast" >
             {
                 forecastData &&
                 Object.keys(forecastData).map(key => {

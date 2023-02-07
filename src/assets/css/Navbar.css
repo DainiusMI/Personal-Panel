@@ -1,14 +1,14 @@
 .navbar {
   width: calc(100% - 3rem);
   padding-inline: 1.5rem;
+  height: 5rem;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  border-bottom: 1px solid black;
-  background: rgb(226, 226, 217);
-  background: linear-gradient(0deg, rgb(226, 226, 217) 0%, rgb(255, 255, 255) 100%);
+  color: #fff;
+  background: rgb(0, 0, 0);
+  background: linear-gradient(180deg, rgb(0, 0, 0) 0%, rgba(27, 26, 26, 0.6) 70%, rgba(48, 48, 48, 0.1) 100%);
   position: fixed;
   top: 0;
   z-index: 99;
@@ -40,6 +40,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  gap: 0.3rem;
   height: 95%;
   padding-inline: 0.3rem;
   border-inline: 1px solid transparent;
@@ -53,6 +54,9 @@
   border-color: black;
   border-bottom: 3px solid #fff;
   margin-bottom: -3px;
+}
+.weather__gadget .gadget__main > * > * {
+  pointer-events: none;
 }
 .weather__gadget .gadget__extra {
   z-index: 20;

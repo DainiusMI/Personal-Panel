@@ -6,12 +6,12 @@
   justify-content: flex-end;
   gap: 0.5rem;
   padding: 3rem;
-  background-color: #FFF;
-  border-inline: 1px solid black;
-  border-bottom: 1px solid black;
+  background-color: rgba(255, 255, 255, 0.5960784314);
   border-radius: 0 0 0.5rem 0.5rem;
   position: absolute;
+  top: 5rem;
   right: 0;
+  z-index: 99;
 }
 .settings label {
   display: flex;
@@ -26,8 +26,9 @@
   text-indent: 0.5rem;
   margin-left: 3rem;
 }
-.settings .settings__city label,
-.settings .settings__username label {
+.settings .settings__username label,
+.settings .settings_background label,
+.settings .settings__city label {
   display: flex;
   flex-direction: column;
   align-items: flex-start;

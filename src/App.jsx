@@ -17,18 +17,16 @@ export default function App() {
     api_ninjas: "/o/LAoa+7TG7v1KX6dxsVg==9uyHCBOTmCjaGUSE"
   }
 
-
-
+  
   const [userData, setUserData] = useState(fromLocalStorage() || {
     user_ip: "",
     user_name: "user",
     units: "metric",
+    background: "random",
     city_name: "",
     city_remember: false
   })
-
-
-
+  
   //localStorage.clear()
 
   function toLocalStorage() {
@@ -94,11 +92,12 @@ export default function App() {
 const [openedTab, setOpenedTab] = useState("none")
 
 const handleOpenedTab = (event) => {
+  console.log("click")
   openedTab === event.target.dataset.tab ?
     setOpenedTab("none") :
     setOpenedTab(event.target.dataset.tab)
 }
-
+console.log(openedTab)
  return (
    <div className="App">
       <Navbar 
@@ -127,22 +126,15 @@ const handleOpenedTab = (event) => {
         />
       }
       <Background
+          userData={userData}
           openedTab={openedTab}
           api_keys={api_keys}
       />
+
       {
-        openedTab !== "forecast" &&
-        <Footer 
-          openedTab={openedTab}
-          setOpenedTab={setOpenedTab}
-        />
+        openedTab === "todo" &&
+        <ToDo />
       }
-        {
-               openedTab === "todo" &&
-          <ToDo
-  
-          />
-        }
     </div>
   )
 }

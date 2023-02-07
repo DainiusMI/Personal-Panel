@@ -6,7 +6,8 @@
   align-items: center;
   justify-content: center;
   font-family: "Reenie Beanie", sans-serif;
-  position: relative;
+  position: absolute;
+  top: 1rem;
 }
 .todo i {
   cursor: pointer;

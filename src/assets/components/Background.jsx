@@ -1,27 +1,23 @@
 import React, {useState, useEffect} from "react";
 import "../css/background.css"
 
-export default function Background({openedTab, api_keys}) {
+export default function Background({openedTab, api_keys, userData}) {
 
     const [backgroundImage, setBackgroundImage] = useState({})
-    const query = "dark"
     useEffect(() => {
         const randomIndex = Math.floor(Math.random() * 19)
         
-        fetch(`https://api.unsplash.com/search/photos?query=${query}&per_page=20&client_id=${api_keys.unsplash}`).
+        fetch(`https://api.unsplash.com/search/photos?query=${userData.background}&per_page=20&client_id=${api_keys.unsplash}`).
         then(resp => resp.json()).
         then(data => {
-             console.log(data.results[randomIndex])
              setBackgroundImage({
                 small: data.results[randomIndex].urls.small,
                 medium: data.results[randomIndex].urls.regular,
                 large: data.results[randomIndex].urls.full
              })
         })
-        console.log(backgroundImage)
 
-    }, [])
-    //console.log(backgroundImage)
+    }, [userData.background])
     return (
         <div 
             id="main__screen"
@@ -29,8 +25,24 @@ export default function Background({openedTab, api_keys}) {
             style={{backgroundImage: `url('${backgroundImage.large}')`}}
         >
             {
-            
+                <Clock 
+
+                />
             }
+        </div>
+    )
+}
+
+
+function Clock() {
+
+    const [date, setDate] = useState({
+        
+    })
+    //console.log(new Date())
+    return (
+        <div className="clock__container">
+
         </div>
     )
 }
