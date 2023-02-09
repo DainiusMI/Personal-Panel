@@ -4,7 +4,7 @@ import Settings from './assets/components/Settings'
 import Forecast from './assets/components/Forecast'
 import Background from './assets/components/Background'
 import ToDo from './assets/components/ToDo'
-
+import Footer from './assets/components/Footer'
 
 
 export default function App() {
@@ -28,18 +28,13 @@ export default function App() {
   const [toDoData, setToDoData] = useState(fromLocalStorage()?.toDoData || [])
   //localStorage.clear()
 
-
-
-
   function toLocalStorage() {
     const data = {}
     data.userData = userData
     data.toDoData = toDoData
     localStorage.setItem("personal_panel", JSON.stringify(data))
-    console.log("changes where saved")
   }
   useEffect(() => {
-    console.log("changes happened")
     toLocalStorage()
   }, [userData, toDoData])
 
@@ -100,7 +95,6 @@ export default function App() {
 const [openedTab, setOpenedTab] = useState("none")
 
 const handleOpenedTab = (event) => {
-  console.log("click")
   openedTab === event.target.dataset.tab ?
     setOpenedTab("none") :
     setOpenedTab(event.target.dataset.tab)
@@ -144,6 +138,10 @@ const handleOpenedTab = (event) => {
           toDoData={toDoData}
           setToDoData={setToDoData}
         />
+      }
+      {
+        userData.user_name === "user" &&
+        <Footer  />
       }
     </div>
   )
