@@ -9,7 +9,6 @@ export default function Navbar({api_keys, userData, setUserData, openedTab, hand
 
     const [currentWeather, setCurrentWeather] = useState({})
 
-    console.log(gadgetState)
     useEffect(() => {
         if (userData.latitude === undefined || userData.longitude === undefined) {
             return

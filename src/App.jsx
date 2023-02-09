@@ -4,7 +4,6 @@ import Settings from './assets/components/Settings'
 import Forecast from './assets/components/Forecast'
 import Background from './assets/components/Background'
 import ToDo from './assets/components/ToDo'
-import Footer from './assets/components/Foooter'
 
 
 
@@ -18,7 +17,7 @@ export default function App() {
   }
 
   
-  const [userData, setUserData] = useState(fromLocalStorage() || {
+  const [userData, setUserData] = useState(fromLocalStorage()?.userData || {
     user_ip: "",
     user_name: "user",
     units: "metric",
@@ -26,15 +25,24 @@ export default function App() {
     city_name: "",
     city_remember: false
   })
-  
+  const [toDoData, setToDoData] = useState(fromLocalStorage()?.toDoData || [])
   //localStorage.clear()
 
+
+
+
   function toLocalStorage() {
-    localStorage.setItem("personal_panel", JSON.stringify(userData))
+    const data = {}
+    data.userData = userData
+    data.toDoData = toDoData
+    localStorage.setItem("personal_panel", JSON.stringify(data))
+    console.log("changes where saved")
   }
   useEffect(() => {
+    console.log("changes happened")
     toLocalStorage()
-  }, [userData])
+  }, [userData, toDoData])
+
   function fromLocalStorage() {
     const dataObject = JSON.parse(localStorage.getItem("personal_panel"))
     return dataObject
@@ -97,7 +105,6 @@ const handleOpenedTab = (event) => {
     setOpenedTab("none") :
     setOpenedTab(event.target.dataset.tab)
 }
-console.log(openedTab)
  return (
    <div className="App">
       <Navbar 
@@ -133,7 +140,10 @@ console.log(openedTab)
 
       {
         openedTab === "todo" &&
-        <ToDo />
+        <ToDo 
+          toDoData={toDoData}
+          setToDoData={setToDoData}
+        />
       }
     </div>
   )

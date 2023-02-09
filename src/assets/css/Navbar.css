@@ -59,7 +59,7 @@
   pointer-events: none;
 }
 .weather__gadget .gadget__extra {
-  z-index: 20;
+  z-index: 99;
   position: absolute;
   bottom: 0rem;
   transform: translateY(100%);

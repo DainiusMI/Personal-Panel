@@ -13,6 +13,7 @@
     position: fixed;
     top: 0;
     z-index: 99;
+    
     &>* {
         cursor: pointer;
     }
@@ -61,7 +62,7 @@
     
     
     .gadget__extra {
-        z-index: 20;
+        z-index: 99;
         position: absolute;
         bottom: 0rem;
         transform: translateY(100%);

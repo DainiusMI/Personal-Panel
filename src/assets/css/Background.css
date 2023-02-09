@@ -8,7 +8,69 @@
   top: 0;
 }
 
+.clock {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.clock > * {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.clock .date__row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.clock .time__row :not(:first-child) {
+  margin-left: 0.6rem;
+  position: relative;
+}
+.clock .time__row :not(:first-child)::before {
+  content: ":";
+  position: absolute;
+  top: 50%;
+  left: -0.3rem;
+  transform: translate(-50%, -50%);
+}
+
+.clock.big {
+  top: 8rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.clock.big .date__row {
+  font-size: 1.3rem;
+  gap: 0.4rem;
+}
+.clock.big .time__row {
+  font-size: 4rem;
+}
+.clock.big .time__row :not(:first-child)::before {
+  font-size: 3rem;
+}
+
+.clock.small {
+  right: 1rem;
+  bottom: 1rem;
+}
+.clock.small .date__row {
+  font-size: 0.9rem;
+  gap: 0.4rem;
+}
+.clock.small .time__row {
+  font-size: 2rem;
+}
+.clock.small .time__row :not(:first-child)::before {
+  font-size: 1.5rem;
+}
+
 .clock__text {
   color: #fff;
-  text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+  text-shadow: 2px 0 0 #000, 0 -2px 0 #000, 0 2px 0 #000, -2px 0 0 #000;
 }/*# sourceMappingURL=Background.css.map */

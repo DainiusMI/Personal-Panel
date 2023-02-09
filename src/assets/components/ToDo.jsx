@@ -1,9 +1,8 @@
 import React, { useState, useEffect} from "react";
 import "../css/ToDo.css"
 
-export default function ToDo() {
+export default function ToDo({toDoData, setToDoData}) {
 
-    const [toDoData, setToDoData] = useState([])
     const setInactive = () => {
         return toDoData.map(note => {
             return {
@@ -40,6 +39,9 @@ export default function ToDo() {
 
     return (
         <div className="todo">
+
+            {
+            toDoData.every(note => note.input_active === false) &&
             <div 
                 className="add_note" 
                 onClick={addNote}
@@ -47,6 +49,7 @@ export default function ToDo() {
                 <i className="fa-solid fa-plus"/>
                 <p className="todo__add__dummy__text"> ADD</p>
             </div>
+            }
 
             <ul 
                 className="note__grid"

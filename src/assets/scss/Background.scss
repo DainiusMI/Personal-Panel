@@ -12,10 +12,69 @@
     top: 0;
 }   
 
+.clock {
+
+    position: absolute;
 
 
+    @include flex(column, center, center);
+    &>* {
+        @include flex(row, center, center);
+    }
+    .date__row {
+        @include flex(row, center, space-between);
+    }
+    .time__row {
+        :not(:first-child) {
+            margin-left: .6rem;
+            position: relative;
+            &::before {
+                content: ":";
+                position: absolute;
+                top: 50%;
+                left: -.3rem;
+                transform: translate(-50%, -50%);
+            }
+        }
+    }
+
+}
+.clock.big {
+    top: 8rem;
+    left: 50%;
+    transform: translateX(-50%);
+    .date__row {
+        font-size: 1.3rem;
+        gap: .4rem;
+    }
+    .time__row {
+        font-size: 4rem;
+        :not(:first-child) {
+
+
+            &::before {
+                font-size: 3rem;
+            }
+        }
+    }
+}
+.clock.small {
+    right: 1rem;
+    bottom: 1rem;
+    .date__row {
+        font-size: .9rem;
+        gap: .4rem;
+    }
+    .time__row {
+        font-size: 2rem;
+        :not(:first-child) {
+            &::before {
+                font-size: 1.5rem;
+            }
+        }
+    }
+}
 .clock__text {
-
     color: #fff;
-    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+    text-shadow: 2px 0 0 #000, 0 -2px 0 #000, 0 2px 0 #000, -2px 0 0 #000;
 }

@@ -10,6 +10,7 @@ body {
     height: 100vh;
     @include flex(column, flex-start, flex-start);
     font-family: sans-serif;
+
 }
 .App {
     width: 100vw;
